@@ -2,8 +2,7 @@
 
 ## Reporting a Vulnerability
 
-Please report security vulnerabilities by opening a private security advisory in GitHub
-or by emailing security@example.com.
+Please report security vulnerabilities by opening a private security advisory in GitHub.
 
 Include:
 - A description of the vulnerability
