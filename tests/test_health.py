@@ -1,5 +1,6 @@
 from fastapi.testclient import TestClient
 
+from app.config import settings
 from app.main import app
 
 client = TestClient(app)
@@ -27,11 +28,11 @@ def test_health_query_returns_expected_shape() -> None:
         "data": {
             "health": {
                 "status": "ok",
-                "mode": "development",
+                "mode": settings.mode,
                 "details": {
-                    "version": "0.1.0",
-                    "build_date": "1970-01-01T00:00:00Z",
-                    "git_commit_sha": "0000000",
+                    "version": settings.version,
+                    "build_date": settings.build_date,
+                    "git_commit_sha": settings.git_commit_sha,
                 },
             }
         }
