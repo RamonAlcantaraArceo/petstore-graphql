@@ -2,6 +2,8 @@ import strawberry
 from strawberry.schema.config import StrawberryConfig
 
 from app.config import settings
+from app.petstore.mutations import PetstoreMutation
+from app.petstore.queries import PetstoreQuery
 
 
 @strawberry.type
@@ -19,7 +21,7 @@ class HealthResponse:
 
 
 @strawberry.type
-class Query:
+class Query(PetstoreQuery):
     @strawberry.field
     def health(self) -> HealthResponse:
         return HealthResponse(
@@ -33,4 +35,13 @@ class Query:
         )
 
 
-schema = strawberry.Schema(query=Query, config=StrawberryConfig(auto_camel_case=False))
+@strawberry.type
+class Mutation(PetstoreMutation):
+    pass
+
+
+schema = strawberry.Schema(
+    query=Query,
+    mutation=Mutation,
+    config=StrawberryConfig(auto_camel_case=False),
+)
