@@ -1,0 +1,13 @@
+site_name: Petstore GraphQL
+
+theme:
+  name: material
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - Testing: testing.md
+  - Configuration: configuration.md
+
+plugins:
+  - search
