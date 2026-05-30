@@ -12,7 +12,7 @@ def make_pet_loader(client: PetstoreClient) -> DataLoader[int, Pet | None]:
     """Return a DataLoader that fetches pets by ID, one request per unique ID.
 
     The Petstore REST API has no batch-by-ID endpoint, so each ID results in
-    one HTTP call.  The DataLoader still deduplates within a single request
+    one HTTP call.  The DataLoader still deduplicates within a single request
     and caches within the same GraphQL operation.
     """
 
