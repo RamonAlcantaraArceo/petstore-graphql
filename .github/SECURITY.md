@@ -2,7 +2,8 @@
 
 ## Reporting a Vulnerability
 
-Please report security vulnerabilities by opening a private security advisory in GitHub.
+Please report security vulnerabilities by opening a private security advisory:
+https://github.com/RamonAlcantaraArceo/petstore-graphql/security/advisories/new
 
 Include:
 - A description of the vulnerability
