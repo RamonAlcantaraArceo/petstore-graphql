@@ -20,7 +20,7 @@ async def _fake_request(self, method: str, path: str, **kwargs):
         ]
 
     if method == "POST" and path == "/user":
-        return {"code": 200, "type": "unknown", "message": "ok"}
+        return {"id": 10, "username": "alice", "firstName": "Alice"}
 
     raise AssertionError(f"Unexpected REST call: {method} {path}")
 
@@ -58,9 +58,9 @@ def test_create_user_mutation_maps_rest_response(monkeypatch) -> None:
     query = """
     mutation {
       create_user(input: {username: \"alice\", password: \"secret\"}) {
-        code
-        type
-        message
+        id
+        username
+        first_name
       }
     }
     """
@@ -69,7 +69,7 @@ def test_create_user_mutation_maps_rest_response(monkeypatch) -> None:
 
     assert response.status_code == 200
     assert response.json()["data"]["create_user"] == {
-        "code": 200,
-        "type": "unknown",
-        "message": "ok",
+        "id": 10,
+        "username": "alice",
+        "first_name": "Alice",
     }

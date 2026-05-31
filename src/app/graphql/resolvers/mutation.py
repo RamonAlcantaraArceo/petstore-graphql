@@ -7,13 +7,14 @@ from app.graphql.mappers import (
     map_api_response,
     map_order,
     map_pet,
+    map_user,
     order_input_to_dict,
     pet_input_to_dict,
     user_input_to_dict,
 )
 from app.graphql.resolvers.utils import get_rest_client, handle_rest_error
 from app.graphql.rest_client import RestError
-from app.graphql.types.models import ApiResponse, Order, Pet
+from app.graphql.types.models import ApiResponse, Order, Pet, User
 
 
 @strawberry.type
@@ -41,10 +42,10 @@ class Mutation:
         pet_id: int,
         name: str | None = None,
         status: str | None = None,
-    ) -> ApiResponse:
+    ) -> Pet:
         try:
             payload = await get_rest_client(info).update_pet_with_form(pet_id, name, status)
-            return map_api_response(payload, default_message="pet updated")
+            return map_pet(payload)
         except RestError as exc:
             raise handle_rest_error(exc) from exc
 
@@ -85,18 +86,18 @@ class Mutation:
             raise handle_rest_error(exc) from exc
 
     @strawberry.mutation
-    async def delete_order(self, info: strawberry.Info, order_id: int) -> ApiResponse:
+    async def delete_order(self, info: strawberry.Info, order_id: int) -> bool:
         try:
-            payload = await get_rest_client(info).delete_order(order_id)
-            return map_api_response(payload, default_message="order deleted")
+            await get_rest_client(info).delete_order(order_id)
+            return True
         except RestError as exc:
             raise handle_rest_error(exc) from exc
 
     @strawberry.mutation
-    async def create_user(self, info: strawberry.Info, input: UserInput) -> ApiResponse:
+    async def create_user(self, info: strawberry.Info, input: UserInput) -> User:
         try:
             payload = await get_rest_client(info).create_user(user_input_to_dict(input))
-            return map_api_response(payload, default_message="user created")
+            return map_user(payload)
         except RestError as exc:
             raise handle_rest_error(exc) from exc
 
@@ -105,12 +106,12 @@ class Mutation:
         self,
         info: strawberry.Info,
         input: list[UserInput],
-    ) -> ApiResponse:
+    ) -> User:
         try:
             payload = await get_rest_client(info).create_users_with_list(
                 [user_input_to_dict(user) for user in input]
             )
-            return map_api_response(payload, default_message="users created")
+            return map_user(payload)
         except RestError as exc:
             raise handle_rest_error(exc) from exc
 

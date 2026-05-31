@@ -34,13 +34,13 @@ type InventoryEntry {
 type Mutation {
   add_pet(input: PetInput!): Pet!
   update_pet(input: PetInput!): Pet!
-  update_pet_with_form(pet_id: Int!, name: String = null, status: String = null): ApiResponse!
+  update_pet_with_form(pet_id: Int!, name: String = null, status: String = null): Pet!
   delete_pet(pet_id: Int!, api_key: String = null): ApiResponse!
   upload_pet_image(pet_id: Int!, additional_metadata: String = null, content: String = null): ApiResponse!
   place_order(input: OrderInput!): Order!
-  delete_order(order_id: Int!): ApiResponse!
-  create_user(input: UserInput!): ApiResponse!
-  create_users_with_list(input: [UserInput!]!): ApiResponse!
+  delete_order(order_id: Int!): Boolean!
+  create_user(input: UserInput!): User!
+  create_users_with_list(input: [UserInput!]!): User!
   update_user(username: String!, input: UserInput!): ApiResponse!
   delete_user(username: String!): ApiResponse!
 }

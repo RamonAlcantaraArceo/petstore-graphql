@@ -29,9 +29,10 @@ class RestClient:
         json: Any = None,
         content: bytes | None = None,
     ) -> Any:
+        normalized_path = path.lstrip("/")
         response = await self._client.request(
             method,
-            path,
+            normalized_path,
             params=params,
             headers=headers,
             json=json,
