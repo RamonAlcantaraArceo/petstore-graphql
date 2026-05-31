@@ -4,8 +4,8 @@ A minimal production-ready GraphQL service scaffolded with FastAPI + Strawberry.
 
 ## Overview
 
-This project exposes a GraphQL API with a single `health` query and includes local development tooling,
-tests, linting, Docker, CI, MkDocs, and GitHub community standards.
+This project exposes a GraphQL API generated from the OpenAPI Petstore contract (`openapi.json`) and
+includes local development tooling, tests, linting, Docker, CI, MkDocs, and GitHub community standards.
 
 ## Install dependencies (uv)
 
@@ -64,6 +64,18 @@ query {
       build_date
       git_commit_sha
     }
+  }
+}
+```
+
+## GraphQL pet query example
+
+```graphql
+query {
+  pets_by_status(status: AVAILABLE) {
+    id
+    name
+    status
   }
 }
 ```
