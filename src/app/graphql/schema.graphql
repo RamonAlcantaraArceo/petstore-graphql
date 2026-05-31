@@ -1,0 +1,157 @@
+type ApiResponse {
+  code: Int
+  type: String
+  message: String
+}
+
+type Category {
+  id: Int
+  name: String
+}
+
+input CategoryInput {
+  id: Int = null
+  name: String = null
+}
+
+type HealthDetails {
+  version: String!
+  build_date: String!
+  git_commit_sha: String!
+}
+
+type HealthResponse {
+  status: String!
+  mode: String!
+  details: HealthDetails!
+}
+
+type InventoryEntry {
+  status: String!
+  count: Int!
+}
+
+type Mutation {
+  add_pet(input: PetInput!): Pet!
+  update_pet(input: PetInput!): Pet!
+  update_pet_with_form(pet_id: Int!, name: String = null, status: String = null): Pet!
+  delete_pet(pet_id: Int!, api_key: String = null): ApiResponse!
+  upload_pet_image(pet_id: Int!, additional_metadata: String = null, content: String = null): ApiResponse!
+  place_order(input: OrderInput!): Order!
+  delete_order(order_id: Int!): Boolean!
+  create_user(input: UserInput!): User!
+  create_users_with_list(input: [UserInput!]!): User!
+  update_user(username: String!, input: UserInput!): ApiResponse!
+  delete_user(username: String!): ApiResponse!
+}
+
+type Order {
+  id: Int
+  pet_id: Int
+  quantity: Int
+  ship_date: String
+  status: OrderStatus
+  complete: Boolean
+  pet: Pet
+}
+
+input OrderInput {
+  id: Int = null
+  pet_id: Int = null
+  quantity: Int = null
+  ship_date: String = null
+  status: OrderStatus = null
+  complete: Boolean = null
+}
+
+enum OrderStatus {
+  PLACED
+  APPROVED
+  DELIVERED
+}
+
+type PageInfo {
+  has_next_page: Boolean!
+  end_cursor: Int
+}
+
+type Pet {
+  id: Int
+  name: String!
+  category: Category
+  photo_urls: [String!]!
+  tags: [Tag!]
+  status: PetStatus
+}
+
+type PetConnection {
+  edges: [PetEdge!]!
+  page_info: PageInfo!
+  total_count: Int!
+}
+
+type PetEdge {
+  cursor: Int!
+  node: Pet!
+}
+
+input PetInput {
+  id: Int = null
+  name: String!
+  category: CategoryInput = null
+  photo_urls: [String!]!
+  tags: [TagInput!] = null
+  status: PetStatus = null
+}
+
+enum PetStatus {
+  AVAILABLE
+  PENDING
+  SOLD
+}
+
+type Query {
+  health: HealthResponse!
+  pet(pet_id: Int!): Pet
+  pets_by_status(status: PetStatus!): [Pet!]!
+  pets_by_status_connection(status: PetStatus!, first: Int = 20, after: Int = 0): PetConnection!
+  pets_by_tags(tags: [String!]!): [Pet!]!
+  pets_by_tags_connection(tags: [String!]!, first: Int = 20, after: Int = 0): PetConnection!
+  store_inventory: [InventoryEntry!]!
+  order(order_id: Int!): Order
+  user(username: String!): User
+  login(username: String!, password: String!): String!
+  logout: String!
+}
+
+type Tag {
+  id: Int
+  name: String
+}
+
+input TagInput {
+  id: Int = null
+  name: String = null
+}
+
+type User {
+  id: Int
+  username: String
+  first_name: String
+  last_name: String
+  email: String
+  password: String
+  phone: String
+  user_status: Int
+}
+
+input UserInput {
+  id: Int = null
+  username: String = null
+  first_name: String = null
+  last_name: String = null
+  email: String = null
+  password: String = null
+  phone: String = null
+  user_status: Int = null
+}
