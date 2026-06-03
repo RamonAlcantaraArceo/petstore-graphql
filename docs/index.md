@@ -89,15 +89,9 @@ Expected response:
 ```json
 {
   "data": {
-    "health": {
-      "status": "ok",
-      "mode": "development",
-      "details": {
-        "version": "0.1.0",
-        "build_date": "1970-01-01T00:00:00Z",
-        "git_commit_sha": "0000000"
-      }
-    }
+    "pets_by_status": []
   }
 }
 ```
+
+Note: The development environment is fully ephemeral. If the service restarts or the environment is recycled, all data is lost.
