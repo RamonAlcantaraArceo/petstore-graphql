@@ -7,6 +7,10 @@ A minimal production-ready GraphQL service scaffolded with FastAPI + Strawberry.
 This project exposes a GraphQL API generated from the OpenAPI Petstore contract (`openapi.json`) and
 includes local development tooling, tests, linting, Docker, CI, MkDocs, and GitHub community standards.
 
+For the initial implementation, the service calls the existing OpenAPI development deployment rather than connecting directly to the database. The priority was to make the interface available end‑to‑end first; the database‑backed implementation will follow.
+
+Deployment at this time is adhoc directly into fly. Upcoming tasks will address deployment via github actions.
+
 ## Install dependencies (uv)
 
 ```bash
