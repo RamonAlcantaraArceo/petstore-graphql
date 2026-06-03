@@ -1,6 +1,4 @@
-# Petstore GraphQL
-
-Minimal production-ready GraphQL service using FastAPI and Strawberry.
+# Petstore GraphQL Examples
 
 ## Health query
 
