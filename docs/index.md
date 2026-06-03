@@ -94,4 +94,4 @@ Expected response:
 }
 ```
 
-Note: The development environment is fully ephemeral. If the service restarts or the environment is recycled, all data is lost.
+**Note**: The development environment is fully ephemeral. If the service restarts or the environment is recycled, all data is lost.
