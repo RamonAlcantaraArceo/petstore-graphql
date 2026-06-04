@@ -2,7 +2,9 @@
 
 ## GraphQL Explorer
 
-You can explore and query the API using the built‑in GraphQL Explorer: [petstore-graphql.fly.dev/graphql](https://petstore-graphql.fly.dev/graphql)
+You can explore and query the API using the built‑in GraphQL Explorer:
+
+  [petstore-graphql.fly.dev/graphql](https://petstore-graphql.fly.dev/graphql){target="_blank" rel="noopener"}
 
 **Note**: The development environment is fully ephemeral. If the service restarts or the environment is recycled, all data is lost.
 
