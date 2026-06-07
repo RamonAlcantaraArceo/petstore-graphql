@@ -6,7 +6,7 @@ class Settings(BaseSettings):
     version: str = "0.1.0"
     build_date: str = "1970-01-01T00:00:00Z"
     git_commit_sha: str = "0000000"
-    petstore_base_url: str = "https://petstore3.swagger.io/api/v3"
+    petstore_base_url: str = "http://api:8000/api/v1"
 
     model_config = SettingsConfigDict(env_prefix="APP_", env_file=".env", extra="ignore")
 
